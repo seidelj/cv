@@ -13,14 +13,7 @@ yellow = [1 1 0];
 white = [1 1 1];
 
 %determine frame color
-if strcmp(data.trials(trial).condition, 'forced')
-    frameColor = red;
-elseif strcmp(data.trials(trial).condition, 'free')
-    frameColor = blue;
-else
-    frameColor = yellow;
-end
-
+if strcmp(data.trials(trial).
 
 % for demo
 theImageLocation = [PsychtoolboxRoot 'PsychDemos' filesep...
@@ -42,7 +35,7 @@ destinationFrame = CenterRectOnPoint(baseFrame,...
     window.xCenter, window.yCenter-window.yPixels*.3);
 
 % The image
-Screen('FrameRect', exp_screen, frameColor, destinationFrame, penWidthPixels);
+Screen('FrameRect', exp_screen, yellow, destinationFrame, penWidthPixels);
 Screen('DrawTexture', exp_screen, imageTexture,[],...
     destinationRect);
 

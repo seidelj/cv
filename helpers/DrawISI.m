@@ -3,7 +3,6 @@ function DrawISI( exp_screen, screenRect )
 %   Detailed explanation goes here
 
 white = WhiteIndex(exp_screen);
-[screenXpixels, screenYPixels] = Screen('WindowSize', exp_screen);
 
 [xCenter, yCenter] = RectCenter(screenRect);
 
