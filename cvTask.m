@@ -1,10 +1,13 @@
-function cvTask(subj)
-if nargin<nargin('cvTask')
+function cvTask(subj, debug)
+if (~exist('subj', 'var'))
     Screen('CloseAll')
     clc
     fprintf('ERROR ***** call with missing subject parameter')
     return
 end
+
+
+
 %% General conifurations
 
 % Directories
@@ -34,6 +37,7 @@ data.keys.continueCode = KbName('space');
 
 %% Build trials structure
 [~, ~, raw] = xlsread(EXCEL{1},EXCEL{2});
+
 
 counter = 1;
 for i=1:length(raw)
@@ -77,20 +81,29 @@ Screen('BlendFunction', exp_screen, 'GL_SRC_ALPHA', 'GL_ONE_MINUS_SRC_ALPHA');
 %% start trials
 data.stimuliOnset = GetSecs;
 breakTimer = GetSecs;
-len = size(data.trials);
 tic;
-for trial = 1:5
-    if GetSecs - breakTimer > 10
-        BreakScreen(exp_screen, window);
-        breakTimer = GetSecs;
-    end
+
+if ~exist('debug', 'var')
+    len = size(data.trials);
+    numberOfTrials = len(2);
+else
+    numberOfTrials = debug;
+end
+
+for trial = 1:numberOfTrials
+%     if GetSecs - breakTimer > 600
+%         BreakScreen(exp_screen, window);
+%         breakTimer = GetSecs;
+%     end
     presTime = 3;
     isiTime = data.trials(trial).isi_time;
-    [resp, onset] = RunTrials(exp_screen, data, trial, presTime, isiTime, window);
+    [resp, onset, secs] = RunTrials(exp_screen, data, trial, presTime, isiTime, window);
     data.trials(trial).response = resp;
     data.trials(trial).stimuliOnset = onset;
     data.trials(trial).trial_time = GetSecs - onset;
+    data.trials(trial).trial_response = secs;
     Screen(exp_screen, 'Flip');
+    Screen('Close');
 end
 
 toc;

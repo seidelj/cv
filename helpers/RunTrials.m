@@ -1,4 +1,4 @@
-function [response, stimuliOnset] = RunTrials( exp_screen, data, trial, presTime, isiTime, window)
+function [response, stimuliOnset, secs] = RunTrials( exp_screen, data, trial, presTime, isiTime, window)
 
 %TIMER Summary of this function goes here
 %   Detailed explanation goes here
@@ -18,9 +18,11 @@ if strcmp(data.trials(trial).condition, 'forced')
     while GetSecs-stimuliOnset < presTime + isiTime
         while GetSecs-stimuliOnset < presTime
             DrawTrialScreen(data, trial, exp_screen, window, response);
+            Screen('DrawingFinished', exp_screen);
             Screen(exp_screen, 'Flip');
         end
         DrawISI(exp_screen, window.screenRect);
+        Screen('DrawingFinished', exp_screen);
         Screen('Flip', exp_screen);
     end
 else
@@ -34,6 +36,7 @@ else
                 if keyIsDown == 1 && any(keyCode(data.keys.resp_key_codes))
                     response = KbName(keyCode);
                     DrawTrialScreen(data, trial, exp_screen, window, response)
+                    Screen('DrawingFinished', exp_screen);
                     Screen(exp_screen, 'Flip');
                     WaitSecs(.7);
                     break;
@@ -44,6 +47,7 @@ else
             response = false;
         end
         DrawISI(exp_screen, window.screenRect);
+        Screen('DrawingFinished', exp_screen);
         Screen('Flip', exp_screen);
    end
 
