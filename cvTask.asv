@@ -41,7 +41,10 @@ data.keys.continueCode = KbName('space');
 % the below runs through a list of charities and
 % replicates the list so that each charity is assigned all
 % three conditions with all 5 price points [5, 10, 15, 20, 25]
+% the final step is to sort on a randomly generated 
 [~, ~, raw] = xlsread(EXCEL{1},EXCEL{2});
+
+
 counter = 1;
 for i=1:length(raw)
     for j = 1:5
