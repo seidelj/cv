@@ -10,6 +10,7 @@ stimuliOnset = GetSecs;
 
 if strcmp(data.trials(trial).condition, 'forced')
     
+    secs = false;
     if round(rand) == 1
         response = KbName(data.keys.yesKey);
     else
