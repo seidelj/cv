@@ -6,7 +6,7 @@ if (~exist('subj', 'var'))
     return
 end
 
-%% General conifurations
+%% General configuration variables
 
 % Directories
 HELPER_DIR = fullfile(pwd, 'helpers');
@@ -32,6 +32,7 @@ resp_keys = {data.keys.yesKey data.keys.noKey};
 data.keys.resp_key_codes = KbName(resp_keys);
 data.keys.backCode = KbName('backspace');
 data.keys.continueCode = KbName('space');
+presTime = 3;
 
 
 %% Build trials structure
@@ -96,7 +97,6 @@ for trial = 1:numberOfTrials
         BreakScreen(exp_screen, window);
         breakTimer = GetSecs;
     end
-    presTime = 3;
     isiTime = data.trials(trial).isi_time;
     [resp, onset, secs] = RunTrials(exp_screen, data, trial, presTime, isiTime, window);
     data.trials(trial).response = resp;
