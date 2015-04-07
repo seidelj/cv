@@ -12,9 +12,9 @@ if strcmp(data.trials(trial).condition, 'forced')
     
     secs = false;
     if round(rand) == 1
-        response = KbName(data.keys.yesKey);
+        response = data.keys.yesKey;
     else
-        response = KbName(data.keys.noKey);
+        response = data.keys.noKey;
     end
     while GetSecs-stimuliOnset < presTime + isiTime
         while GetSecs-stimuliOnset < presTime

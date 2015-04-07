@@ -59,7 +59,7 @@ DrawFormattedText(exp_screen, 'No', window.xPixels*.625,...
 
 % The frames
 if response ~= false
-    if response == KbName(data.keys.yesKey)
+    if response == data.keys.yesKey
         destinationTextFrame = CenterRectOnPoint(textFrame,...
             window.xPixels*.35, window.yPixels*.585);
     else

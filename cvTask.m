@@ -6,8 +6,6 @@ if (~exist('subj', 'var'))
     return
 end
 
-
-
 %% General conifurations
 
 % Directories
@@ -28,9 +26,9 @@ data.filename = ['subj_' num2str(subj) '_cvTask.mat'];
 
 % response keys
 KbName('UnifyKeyNames');
-data.keys.yesKey = KbName('1!');
-data.keys.noKey = KbName('2@');
-resp_keys = {'1!' '2@'};
+data.keys.yesKey = '1!';
+data.keys.noKey = '2@';
+resp_keys = {data.keys.yesKey data.keys.noKey};
 data.keys.resp_key_codes = KbName(resp_keys);
 data.keys.backCode = KbName('backspace');
 data.keys.continueCode = KbName('space');
@@ -94,10 +92,10 @@ else
 end
 
 for trial = 1:numberOfTrials
-%     if GetSecs - breakTimer > 600
-%         BreakScreen(exp_screen, window);
-%         breakTimer = GetSecs;
-%     end
+    if GetSecs - breakTimer > 600
+        BreakScreen(exp_screen, window);
+        breakTimer = GetSecs;
+    end
     presTime = 3;
     isiTime = data.trials(trial).isi_time;
     [resp, onset, secs] = RunTrials(exp_screen, data, trial, presTime, isiTime, window);
@@ -114,4 +112,4 @@ save(fullfile(DATA_DIR, data.filename));
 Screen('CloseAll');
 rmpath(HELPER_DIR);
 rmpath(IMG_DIR);
-
+clc
